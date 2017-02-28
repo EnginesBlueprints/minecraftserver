@@ -1,1 +1,208 @@
-{"software":{"name":"minecraftserver","major":null,"minor":1,"release_level":"Release candidate","patch":null,"license_name":"gnu_general_public_license_v3","license_label":"GNU GENERAL PUBLIC LICENSE V3","license_sourceurl":"http://www.gnu.org/copyleft/gpl.html","full_title":"MCMA Minecraft server","short_title":"minecraftserver","description":"","icon_url":"","home_page_url":"","support_page_url":"","about":"","language":"java","framework":"openjdk","deployment_type":"web","web_root_directory":"","first_run_url":"","publisher":"engines","blocking_worker_name":null,"required_memory":512,"recommended_memory":1024,"http_protocol":"http_and_https","framework_port_overide":8080,"custom_start_script":"#!/bin/sh\r\ncd /home/app\r\nif test ! -f /home/app/Minecraft/installed \r\nthen \r\n/home/app/MCMA2_Linux_x86_64 -nonotice -setpass $Admin_Password\r\ntouch /home/app/Minecraft/installed \r\nelse\r\n . /home/trap.sh\r\n/home/app/MCMA2_Linux_x86_64 -nonotice \u0026\r\npid=$!\r\nwait\r\nkill -TERM $pid\r\nfi","custom_install_script":"#!/bin/sh\r\nmv /home/app/mono /usr/local/etc/; \r\n","custom_post_install_script":"","service_configurations":[{"publisher_namespace":"EnginesSystem","type_path":"filesystem/local/filesystem","variables":{"engine_path":"persistant","permissions":"rw","volume_src":" ","service_name":"_Engines_Builder(engine_name)","group":"_Engines_Builder(data_gid)","user":"_Engines_Builder(data_uid)"}}],"persistent_directories":[{"path":"app/Minecraft"}],"replacement_strings":[],"persistent_files":[],"installed_packages":[{"name":"minecraft_server.1.8.9.jar","source_url":"https://s3.amazonaws.com/Minecraft.Download/versions/1.8.9/minecraft_server.1.8.9.jar","destination":"/home/app/","extraction_command":"","path_to_extracted":""},{"name":"MCMA2_glibc26_2.zip","source_url":"http://mcmyadmin.com/Downloads/MCMA2_glibc26_2.zip","destination":"./","extraction_command":"unzip -u","path_to_extracted":"MCMA2_Linux_x86_64"},{"name":"etc.zip","source_url":"http://mcmyadmin.com/Downloads/etc.zip","destination":"./","extraction_command":"unzip -u","path_to_extracted":"etc"}],"system_packages":[{"package":"libmono-2.0"},{"package":"libmono-microsoft-web-infrastructure1.0-cil"},{"package":"libmono-system-web-http-webhost4.0-cil"}],"workers":[],"ports":[{"port":25565,"external":25565,"protocol":"TCP and UDP"}],"external_repositories":[],"rake_tasks":[],"template_files":[],"file_write_permissions":[{"path":"./","recursive":false}],"custom_php_inis":[],"apache_htaccess_files":[],"apache_httpd_configurations":[],"modules":[],"variables":[{"name":"Admin_Password","value":"","label":"Admin_Password","field_type":"text_field","select_collection":"","tooltip":"","hint":"","placeholder":"","comment":"","regex_validator":"","regex_invalid_message":"","mandatory":true,"ask_at_build_time":true,"build_time_only":false,"immutable":false}],"component_sources":[],"component_path":"","extract_components":false,"installation_report_template":"Goto _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)/ and login with\r\nUser admin\r\nPassword _Engines_Environment(Admin_Password ) \r\n\r\nYou will need to open up access to ports engines_worker_ports on your firewall if this is a cloud installation or you want to publish a home server ","continuous_deployment":false,"database_seed_file":"","actionators":{}}}
+{
+  "schema": {
+    "version": {
+      "major": 1,
+      "minor": 0
+    },
+    "origin": "Engines Developer Studio 1.0"
+  },
+  "metadata": {
+    "blueprint": {
+      "version": {
+        "major": 0,
+        "minor": 1,
+        "level": "rc",
+        "patch": 0
+      },
+      "timestamp": null
+    },
+    "software": {
+      "display": {
+        "title": "MCMA Minecraft server",
+        "label": "minecraftserver",
+        "version": "",
+        "description": "",
+        "url": ""
+      },
+      "license": {
+        "label": "GNU GENERAL PUBLIC LICENSE V3",
+        "url": "http://www.gnu.org/copyleft/gpl.html"
+      }
+    }
+  },
+  "software": {
+    "base": {
+      "name": "minecraftserver",
+      "framework": "openjdk8",
+      "memory": {
+        "required": "512",
+        "recommended": "1024"
+      },
+      "http_protocol": "http_and_https",
+      "framework_port_override": "0",
+      "deployment_type": "web",
+      "web_root_directory": "",
+      "continuous_deployment": false,
+      "first_run_url": "",
+      "installation_report": "Goto _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)/ and login with\r\nUser admin\r\nPassword _Engines_Environment(Admin_Password ) \r\n\r\nYou will need to open up access to ports engines_worker_ports on your firewall if this is a cloud installation or you want to publish a home server "
+    },
+    "scripts": {
+      "start": {
+        "language": "sh",
+        "content": "#!/bin/sh\r\ncd /home/app\r\nif test ! -f /home/app/Minecraft/installed \r\nthen \r\n/home/app/MCMA2_Linux_x86_64 -nonotice -setpass $Admin_Password\r\ntouch /home/app/Minecraft/installed \r\nelse\r\n . /home/trap.sh\r\n/home/app/MCMA2_Linux_x86_64 -nonotice &\r\npid=$!\r\nwait\r\nkill -TERM $pid\r\nfi"
+      },
+      "install": {
+        "language": "sh",
+        "content": "#!/bin/sh\r\nmv /home/app/mono /usr/local/etc/; \r\n"
+      },
+      "post_install": {
+        "language": "sh",
+        "content": ""
+      },
+      "shutdown": {
+        "language": "sh",
+        "content": ""
+      }
+    },
+    "database_seed": {
+      "language": "text",
+      "content": "",
+      "script": false
+    },
+    "components": {
+      "sources": [
+
+      ],
+      "path": "",
+      "extract": false
+    },
+    "persistent_directories": [
+      {
+        "path": "app/Minecraft"
+      }
+    ],
+    "service_configurations": [
+      {
+        "namespace": "EnginesSystem",
+        "type_path": "filesystem/local/filesystem",
+        "variables": {
+          "engine_path": "persistant",
+          "permissions": "rw",
+          "volume_src": " ",
+          "service_name": "_Engines_Builder(engine_name)",
+          "group": "_Engines_Builder(data_gid)",
+          "user": "_Engines_Builder(data_uid)"
+        }
+      }
+    ],
+    "replacement_strings": [
+
+    ],
+    "persistent_files": [
+
+    ],
+    "installed_packages": [
+      {
+        "name": "minecraft_server.1.8.9.jar",
+        "source_url": "https://s3.amazonaws.com/Minecraft.Download/versions/1.8.9/minecraft_server.1.8.9.jar",
+        "destination": "/home/app/",
+        "extraction_command": "",
+        "path_to_extracted": ""
+      },
+      {
+        "name": "MCMA2_glibc26_2.zip",
+        "source_url": "http://mcmyadmin.com/Downloads/MCMA2_glibc26_2.zip",
+        "destination": "./",
+        "extraction_command": "unzip -u",
+        "path_to_extracted": "MCMA2_Linux_x86_64"
+      },
+      {
+        "name": "etc.zip",
+        "source_url": "http://mcmyadmin.com/Downloads/etc.zip",
+        "destination": "./",
+        "extraction_command": "unzip -u",
+        "path_to_extracted": "etc"
+      }
+    ],
+    "system_packages": [
+      {
+        "package": "libmono-2.0"
+      },
+      {
+        "package": "libmono-microsoft-web-infrastructure1.0-cil"
+      },
+      {
+        "package": "libmono-system-web-http-webhost4.0-cil"
+      }
+    ],
+    "workers": {
+      "blocking": "",
+      "commands": [
+
+      ]
+    },
+    "rake_tasks": [
+
+    ],
+    "template_files": [
+
+    ],
+    "file_write_permissions": [
+      {
+        "path": "./",
+        "recursive": false
+      }
+    ],
+    "custom_php_inis": [
+
+    ],
+    "apache_htaccess_files": [
+
+    ],
+    "apache_httpd_configurations": [
+
+    ],
+    "required_modules": [
+
+    ],
+    "ports": [
+      {
+        "port": 25565,
+        "external": 25565,
+        "protocol": "TCP and UDP"
+      }
+    ],
+    "actionators": [
+
+    ],
+    "external_repositories": [
+
+    ],
+    "environment_variables": [
+      {
+        "name": "Admin_Password",
+        "value": "",
+        "ask_at_build_time": true,
+        "build_time_only": false,
+        "immutable": false,
+        "input": {
+          "type": "string",
+          "label": "Admin_Password",
+          "title": "",
+          "hint": "",
+          "placeholder": "",
+          "validation": {
+            "required": true,
+            "pattern": "",
+            "message": ""
+          },
+          "collection": {
+            "include_blank": false,
+            "items": {
+            }
+          }
+        }
+      }
+    ]
+  }
+}
